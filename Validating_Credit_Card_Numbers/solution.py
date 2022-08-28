@@ -1,15 +1,15 @@
 # Enter your code here. Read input from STDIN. Print output to STDOUT
 import re 
 
-N = int(input())
-pattern = r"^[456][\d]{15}|^[456][\d]{3}-[\d]{4}-[\d]{4}-[\d]{4}$"
-no_repeats = r"" # under construction 
-filters = [pattern, no_repeats]
+# Credit card pattern 
+pattern = r"^[456][\d]{15}$|^[456][\d]{3}-[\d]{4}-[\d]{4}-[\d]{4}$"
 
-for x in range(N):
-    credit_card = input()
-    if all(re.match(f, credit_card) for f in filters):
+# For each credit card number, validate against pattern and check for repeating digits 
+for x in range(int(input())):
+    credit_card = input().strip()
+    
+    if re.match(pattern, credit_card) and not re.search(r"(\d)(-?\1){3}", credit_card):
         print("Valid")
     else:
         print("Invalid")
-    
+        
